@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">extools</string>
+
+    <string name="progressdialog_toast">正在加载,请稍后...</string>
+</resources>
