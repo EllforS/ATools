@@ -14,7 +14,7 @@ import com.ellfors.extools.utils.AppUtil;
 public class BaseActivity extends AppCompatActivity
 {
     public static Context mContext;
-    private ProgressDialog progressDialog;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -27,7 +27,8 @@ public class BaseActivity extends AppCompatActivity
     private void init()
     {
         mContext = this;
-        progressDialog = new ProgressDialog(this);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
     }
 
     /**
@@ -39,12 +40,20 @@ public class BaseActivity extends AppCompatActivity
     }
 
     /**
+     * 获取ProgressDialog实例
+     */
+    public ProgressDialog getProgressDialog()
+    {
+        return mProgressDialog;
+    }
+
+    /**
      * 显示自定义ProgrssDialog
      */
     public void showProgressDialog(String msg)
     {
-        progressDialog.setMessage(msg);
-        progressDialog.show();
+        mProgressDialog.setMessage(msg);
+        mProgressDialog.show();
     }
 
     /**
@@ -52,8 +61,8 @@ public class BaseActivity extends AppCompatActivity
      */
     public void showDefaultProgressDialog()
     {
-        progressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
-        progressDialog.show();
+        mProgressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
+        mProgressDialog.show();
     }
 
     /**
@@ -61,8 +70,8 @@ public class BaseActivity extends AppCompatActivity
      */
     public void dismissProgressDialog()
     {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 
@@ -71,7 +80,7 @@ public class BaseActivity extends AppCompatActivity
      */
     public boolean progressDialogIsShowing()
     {
-        if (progressDialog.isShowing()) {
+        if (mProgressDialog.isShowing()) {
             return true;
         } else {
             return false;

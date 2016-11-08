@@ -14,7 +14,7 @@ import com.ellfors.extools.utils.AppUtil;
 
 public class BaseFragment extends Fragment {
     private Context mContext;
-    private ProgressDialog progressDialog;
+    private ProgressDialog mProgressDialog;
     private View mView;
 
     @Override
@@ -34,7 +34,8 @@ public class BaseFragment extends Fragment {
 
     private void init() {
         mContext = getActivity();
-        progressDialog = new ProgressDialog(mContext);
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
     }
 
     /**
@@ -46,27 +47,35 @@ public class BaseFragment extends Fragment {
     }
 
     /**
+     * 获取ProgressDialog实例
+     */
+    public ProgressDialog getProgressDialog()
+    {
+        return mProgressDialog;
+    }
+
+    /**
      * 显示自定义ProgrssDialog
      */
     public void showProgressDialog(String msg) {
-        progressDialog.setMessage(msg);
-        progressDialog.show();
+        mProgressDialog.setMessage(msg);
+        mProgressDialog.show();
     }
 
     /**
      * 显示默认ProgressDialog
      */
     public void showDefaultProgressDialog() {
-        progressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
-        progressDialog.show();
+        mProgressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
+        mProgressDialog.show();
     }
 
     /**
      * 隐藏ProgressDialog
      */
     public void dismissProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 
@@ -74,7 +83,7 @@ public class BaseFragment extends Fragment {
      * 判断ProgressDialog是否为显示状态
      */
     public boolean progressDialogIsShowing() {
-        if (progressDialog.isShowing()) {
+        if (mProgressDialog.isShowing()) {
             return true;
         } else {
             return false;
