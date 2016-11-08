@@ -17,9 +17,12 @@ public class BaseApplication extends Application {
 
     public static BaseApplication getInstance() {
 
-        if (instance == null) {//第一次检查
+        //第一次检查
+        if (instance == null) {
+            //加入同步锁，保证线程安全
             synchronized (BaseApplication.class) {
-                if (instance == null) {//第二次检查
+                //第二次检查
+                if (instance == null) {
                     instance = new BaseApplication();
                 }
             }
