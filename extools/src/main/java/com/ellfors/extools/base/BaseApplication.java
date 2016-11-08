@@ -9,7 +9,7 @@ public class BaseApplication extends Application {
     private static Stack<Activity> stack;
 
     //双重校验锁
-    private volatile static BaseApplication instance;
+    private volatile static BaseApplication instance; //加入volatile防止JVM重排序
 
     public BaseApplication() {
 
@@ -17,9 +17,9 @@ public class BaseApplication extends Application {
 
     public static BaseApplication getInstance() {
 
-        if (instance == null) {
+        if (instance == null) {//第一次检查
             synchronized (BaseApplication.class) {
-                if (instance == null) {
+                if (instance == null) {//第二次检查
                     instance = new BaseApplication();
                 }
             }
