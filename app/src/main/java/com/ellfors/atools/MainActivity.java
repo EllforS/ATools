@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity
     private List<String> getData()
     {
         List<String> list = new ArrayList<>();
-        for(int i = 0 ; i < 21 ; i ++)
+        for(int i = 0 ; i < 20 ; i ++)
         {
             list.add("第" + (i+1) + "条");
         }

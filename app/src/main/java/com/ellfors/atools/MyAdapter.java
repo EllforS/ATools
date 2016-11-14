@@ -9,110 +9,80 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ellfors.extools.adapter.BaseRcvAdapter;
-
+import com.ellfors.extools.base.BaseViewHolder;
 
 import java.util.List;
 
-public class MyAdapter extends BaseRcvAdapter
-{
+public class MyAdapter extends BaseRcvAdapter {
     private Context context;
     private List<String> list;
 
-    public MyAdapter(Context context, List<String> list)
-    {
-        super(true,true);
+    public MyAdapter(Context context, List<String> list) {
+        super(true, true);
         this.context = context;
         this.list = list;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateHolder(ViewGroup parent, int viewType)
-    {
-        Log.e("AAA",viewType + "");
+    public RecyclerView.ViewHolder onCreateHolder(ViewGroup parent, int viewType) {
 
-        if(viewType == TYPE_ITEM)
-        {
-            return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_recycler,parent,false));
+        if (viewType == TYPE_ITEM) {
+            return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_recycler, parent, false));
         }
-        if(viewType == TYPE_HEADER)
-        {
-            return new HeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_recycler,parent,false));
+        if (viewType == TYPE_HEADER) {
+            return new HeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_header, parent, false));
         }
-        if(viewType == TYPE_FOOTER)
-        {
-            return new FooterViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_recycler,parent,false));
+        if (viewType == TYPE_FOOTER) {
+            return new FooterViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_footer, parent, false));
         }
         return null;
     }
 
     @Override
-    public void onBindHolder(RecyclerView.ViewHolder holder, int position)
-    {
-        if(holder instanceof ItemViewHolder)
-        {
+    public void onBindHolder(RecyclerView.ViewHolder holder, int position) {
+
+        Log.i("AAA","position === " + position + "  type === " + holder.getItemViewType());
+
+        if (holder instanceof ItemViewHolder) {
             ((ItemViewHolder) holder).text.setText(list.get(position));
-        }
-        else if(holder instanceof HeaderViewHolder)
-        {
+        } else if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).title.setText("标题");
-        }
-        else if(holder instanceof FooterViewHolder)
-        {
+        } else if (holder instanceof FooterViewHolder) {
             ((FooterViewHolder) holder).bottom.setText("底部");
         }
     }
 
     @Override
-    public int getItemSize()
-    {
-        return list.size() + 1;
+    public int getItemSize() {
+        return list.size() + 2;
     }
 
-    @Override
-    public int getItemViewType(int position)
-    {
-        if(position == 0)
-        {
-            return TYPE_HEADER;
-        }
-        else if(position + 1 == getItemSize())
-        {
-            return TYPE_FOOTER;
-        }
-        else
-        {
-            return TYPE_ITEM;
-        }
-    }
-
-    public class ItemViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView text;
-        public ItemViewHolder(View itemView)
-        {
+
+        public ItemViewHolder(View itemView) {
             super(itemView);
 
             text = (TextView) itemView.findViewById(R.id.item_text);
         }
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder
-    {
+    public class HeaderViewHolder extends BaseViewHolder {
         private TextView title;
-        public HeaderViewHolder(View itemView)
-        {
+
+        public HeaderViewHolder(View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.item_text);
+            title = $(R.id.item_header);
         }
     }
 
-    public class FooterViewHolder extends RecyclerView.ViewHolder
-    {
+    public class FooterViewHolder extends BaseViewHolder {
         private TextView bottom;
+
         public FooterViewHolder(View itemView) {
             super(itemView);
-            bottom = (TextView) itemView.findViewById(R.id.item_text);
+            bottom = $(R.id.item_footer);
         }
     }
 }
