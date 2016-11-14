@@ -11,9 +11,9 @@ import android.view.ViewGroup;
  */
 public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    public static final int TYPE_ITEM = 11;
-    public static final int TYPE_FOOTER = 12;
-    public static final int TYPE_HEADER = 13;
+    protected static final int TYPE_HEADER = 11;
+    protected static final int TYPE_ITEM = 12;
+    protected static final int TYPE_FOOTER = 13;
 
     private boolean isHasHeader = false;
     private boolean isHasFooter = false;
@@ -49,7 +49,14 @@ public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position)
     {
-        onBindHolder(holder,position);
+        if(isHasHeader)
+        {
+            onBindHolder(holder,position - 1);
+        }
+        else
+        {
+            onBindHolder(holder,position);
+        }
 
         if(onItemClickListener != null)
         {
@@ -58,7 +65,14 @@ public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerVie
                 @Override
                 public void onClick(View v)
                 {
-                    onItemClickListener.onItemClick(holder.itemView,holder.getLayoutPosition());
+                    if(isHasHeader)
+                    {
+                        onItemClickListener.onItemClick(holder.itemView,holder.getLayoutPosition() - 1);
+                    }
+                    else
+                    {
+                        onItemClickListener.onItemClick(holder.itemView,holder.getLayoutPosition());
+                    }
                 }
             });
 
@@ -67,7 +81,14 @@ public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerVie
                 @Override
                 public boolean onLongClick(View v)
                 {
-                    onItemClickListener.onItemLongClick(holder.itemView,holder.getLayoutPosition());
+                    if(isHasHeader)
+                    {
+                        onItemClickListener.onItemClick(holder.itemView,holder.getLayoutPosition() - 1);
+                    }
+                    else
+                    {
+                        onItemClickListener.onItemLongClick(holder.itemView,holder.getLayoutPosition());
+                    }
                     return false;
                 }
             });
@@ -78,6 +99,58 @@ public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerVie
     public int getItemCount()
     {
         return getItemSize();
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        if (isHasHeader)
+        {
+            if (isHasFooter)
+            {
+                if (position == 0)
+                {
+                    return TYPE_HEADER;
+                }
+                else if (position + 1 == getItemSize())
+                {
+                    return TYPE_FOOTER;
+                }
+                else
+                {
+                    return TYPE_ITEM;
+                }
+            }
+            else
+            {
+                if (position == 0)
+                {
+                    return TYPE_HEADER;
+                }
+                else
+                {
+                    return TYPE_ITEM;
+                }
+            }
+        }
+        else
+        {
+            if(isHasFooter)
+            {
+                if (position == getItemSize() - 1)
+                {
+                    return TYPE_FOOTER;
+                }
+                else
+                {
+                    return TYPE_ITEM;
+                }
+            }
+            else
+            {
+                return TYPE_ITEM;
+            }
+        }
     }
 
     /**
