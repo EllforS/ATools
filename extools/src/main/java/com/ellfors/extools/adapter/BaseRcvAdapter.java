@@ -123,14 +123,25 @@ public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerVie
      * 为StaggeredGridLayout FootView设置占位为一行
      */
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder)
+    {
         super.onViewAttachedToWindow(holder);
 
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
 
+        //HeaderView
         if (lp != null
                 && lp instanceof StaggeredGridLayoutManager.LayoutParams
-                && holder.getLayoutPosition() == 0) {
+                && holder.getLayoutPosition() == 0)
+        {
+            StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
+            p.setFullSpan(true);
+        }
+        //FooterView
+        else if(lp != null
+                && lp instanceof StaggeredGridLayoutManager.LayoutParams
+                && holder.getLayoutPosition() % TYPE_FOOTER == 0)
+        {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
             p.setFullSpan(true);
         }
