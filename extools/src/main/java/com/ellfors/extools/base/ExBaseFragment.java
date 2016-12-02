@@ -11,7 +11,7 @@ import com.ellfors.extools.R;
 import com.ellfors.extools.utils.AppUtil;
 
 
-public class BaseFragment extends Fragment {
+public class ExBaseFragment extends Fragment {
     private Context mContext;
     private ProgressDialog mProgressDialog;
     private View mView;

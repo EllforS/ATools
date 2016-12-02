@@ -4,11 +4,11 @@ package com.ellfors.extools.base;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class BaseViewHolder extends RecyclerView.ViewHolder
+public class ExBaseViewHolder extends RecyclerView.ViewHolder
 {
     private View mItemView;
 
-    public BaseViewHolder(View itemView)
+    public ExBaseViewHolder(View itemView)
     {
         super(itemView);
         this.mItemView = itemView;

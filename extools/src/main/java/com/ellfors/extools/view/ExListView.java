@@ -7,17 +7,17 @@ import android.widget.ListView;
 /**
  * 自适应ScrollView的ListView
  */
-public class MyListView extends ListView {
+public class ExListView extends ListView {
 
-    public MyListView(Context context) {
+    public ExListView(Context context) {
         super(context);
     }
 
-    public MyListView(Context context, AttributeSet attrs) {
+    public ExListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyListView(Context context, AttributeSet attrs, int defStyle) {
+    public ExListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

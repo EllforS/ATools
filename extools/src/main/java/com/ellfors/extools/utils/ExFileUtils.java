@@ -8,7 +8,7 @@ import android.text.TextUtils;
 /**
  * 获取App版本数据
  */
-public class FileUtils {
+public class ExFileUtils {
 
     /**
      * 获取当前版本名

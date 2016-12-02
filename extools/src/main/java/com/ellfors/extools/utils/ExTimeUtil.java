@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 时间工具类
  */
-public class TimeUtil {
+public class ExTimeUtil {
 
     private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
         @Override

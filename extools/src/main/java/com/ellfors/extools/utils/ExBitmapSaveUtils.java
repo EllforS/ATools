@@ -21,7 +21,7 @@ import java.io.IOException;
  * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
  * <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
  */
-public class BitmapSaveUtils {
+public class ExBitmapSaveUtils {
     private static String errorMessage;
 
     /**

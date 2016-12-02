@@ -7,19 +7,19 @@ import android.widget.GridView;
 /**
  * 自适应ScrollView的GridView
  */
-public class MyGridView extends GridView {
+public class ExGridView extends GridView {
 
     private boolean haveScrollbar = false;
 
-    public MyGridView(Context context) {
+    public ExGridView(Context context) {
         super(context);
     }
 
-    public MyGridView(Context context, AttributeSet attrs) {
+    public ExGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyGridView(Context context, AttributeSet attrs, int defStyle) {
+    public ExGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

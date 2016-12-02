@@ -5,25 +5,25 @@ import android.app.Application;
 
 import java.util.Stack;
 
-public class BaseApplication extends Application {
+public class ExBaseApplication extends Application {
     private static Stack<Activity> stack;
 
     //双重校验锁
-    private volatile static BaseApplication instance; //加入volatile防止JVM重排序
+    private volatile static ExBaseApplication instance; //加入volatile防止JVM重排序
 
-    public BaseApplication() {
+    public ExBaseApplication() {
 
     }
 
-    public static BaseApplication getInstance() {
+    public static ExBaseApplication getInstance() {
 
         //第一次检查
         if (instance == null) {
             //加入同步锁，保证线程安全
-            synchronized (BaseApplication.class) {
+            synchronized (ExBaseApplication.class) {
                 //第二次检查
                 if (instance == null) {
-                    instance = new BaseApplication();
+                    instance = new ExBaseApplication();
                 }
             }
         }

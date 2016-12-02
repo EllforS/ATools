@@ -17,12 +17,12 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * UI工具类
  */
-public class AppUtil {
+public class ExAppUtil {
 
     /**
      * Preferences参数
      */
-    public static final String SHARED_USSER = "APP";
+    public static final String SHARED_USSER = "ExUtil";
 
     /**
      * 打印文本 长时间

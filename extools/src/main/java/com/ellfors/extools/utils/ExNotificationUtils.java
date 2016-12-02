@@ -16,7 +16,7 @@ import android.widget.RemoteViews;
  * 需要添加
  * <uses-permission android:name="android.permission.VIBRATE"/>
  */
-public class NotificationUtils {
+public class ExNotificationUtils {
     private static NotificationManager manager;
 
     /**

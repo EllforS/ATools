@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 /**
  * 计算和清空缓存大小
  */
-public class DataCleanManager {
+public class ExDataCleanManager {
     /**
      * 获取应用缓存大小
      *

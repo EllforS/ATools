@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * RecyclerView Adapter
  */
-public abstract class BaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public abstract class BaseRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     protected static final int TYPE_HEADER = 11;
     protected static final int TYPE_ITEM = 12;

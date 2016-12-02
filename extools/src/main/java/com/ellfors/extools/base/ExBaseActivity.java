@@ -11,7 +11,7 @@ import android.view.View;
 import com.ellfors.extools.R;
 import com.ellfors.extools.utils.AppUtil;
 
-public class BaseActivity extends AppCompatActivity
+public class ExBaseActivity extends AppCompatActivity
 {
     public static Context mContext;
     private ProgressDialog mProgressDialog;

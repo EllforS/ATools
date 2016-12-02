@@ -13,10 +13,12 @@ import android.widget.RadioGroup;
 
 import com.ellfors.extools.R;
 
+import static com.ellfors.extools.R.styleable.FNRadioGroup;
+
 /**
  * 可换行的RadioGroup
  */
-public class FNRadioGroup extends ViewGroup {
+public class ExRadioGroup extends ViewGroup {
 
     /**
      * 没有ID
@@ -75,7 +77,7 @@ public class FNRadioGroup extends ViewGroup {
     /**
      * 默认构造方法
      */
-    public FNRadioGroup(Context context) {
+    public ExRadioGroup(Context context) {
         super(context);
         init();
 
@@ -84,11 +86,11 @@ public class FNRadioGroup extends ViewGroup {
     /**
      * XML实例构造方法
      */
-    public FNRadioGroup(Context context, AttributeSet attrs) {
+    public ExRadioGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         // 获取自定义属性checkedButton
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.FNRadioGroup);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, FNRadioGroup);
         // 读取默认选中id
         int value = attributes.getResourceId(R.styleable.FNRadioGroup_checkedButton, NO_ID);
         if (value != NO_ID) {
@@ -270,7 +272,7 @@ public class FNRadioGroup extends ViewGroup {
          */
 
 
-        void onCheckedChanged(FNRadioGroup group, int checkedId);
+        void onCheckedChanged(ExRadioGroup group, int checkedId);
 
 
     }
@@ -445,7 +447,7 @@ public class FNRadioGroup extends ViewGroup {
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new FNRadioGroup.LayoutParams(getContext(), attrs);
+        return new ExRadioGroup.LayoutParams(getContext(), attrs);
     }
 
     @Override
@@ -490,7 +492,7 @@ public class FNRadioGroup extends ViewGroup {
         private ViewGroup.OnHierarchyChangeListener mOnHierarchyChangeListener;
 
         public void onChildViewAdded(View parent, View child) {
-            if (parent == FNRadioGroup.this && child instanceof RadioButton) {
+            if (parent == ExRadioGroup.this && child instanceof RadioButton) {
                 int id = child.getId();
                 // generates an id if it's missing
                 if (id == View.NO_ID) {
@@ -506,7 +508,7 @@ public class FNRadioGroup extends ViewGroup {
         }
 
         public void onChildViewRemoved(View parent, View child) {
-            if (parent == FNRadioGroup.this && child instanceof RadioButton) {
+            if (parent == ExRadioGroup.this && child instanceof RadioButton) {
                 ((RadioButton) child).setOnCheckedChangeListener(null);
             }
             if (mOnHierarchyChangeListener != null) {

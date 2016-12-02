@@ -3,7 +3,7 @@ package com.ellfors.extools.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CheckTextUtil {
+public class ExCheckTextUtil {
     /**
      * 判断邮箱格式是否正确
      */
