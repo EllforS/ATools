@@ -19,6 +19,6 @@ Step 2. Add the dependency
 ---
 ```java
   dependencies {
-	        compile 'com.github.EllforS:ATools:v1.5'
+	        compile 'com.github.EllforS:ATools:v1.6'
 	}
 ```
