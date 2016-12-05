@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.ellfors.extools.R;
-import com.ellfors.extools.utils.AppUtil;
+import com.ellfors.extools.utils.ExAppUtils;
 
 public class ExBaseActivity extends AppCompatActivity
 {
@@ -92,7 +92,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public void showToast(String msg)
     {
-        AppUtil.showToast(mContext,msg);
+        ExAppUtils.showToast(mContext,msg);
     }
 
     /**
@@ -100,7 +100,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public void showToast(int resId)
     {
-        AppUtil.showToast(mContext,resId);
+        ExAppUtils.showToast(mContext,resId);
     }
 
     /**
@@ -108,7 +108,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public void showView(View view)
     {
-        AppUtil.showView(view);
+        ExAppUtils.showView(view);
     }
 
     /**
@@ -116,7 +116,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public void hideViewGone(View view)
     {
-        AppUtil.hideViewGone(view);
+        ExAppUtils.hideViewGone(view);
     }
 
     /**
@@ -124,7 +124,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public void hideViewInvisible(View view)
     {
-        AppUtil.hideViewInvisible(view);
+        ExAppUtils.hideViewInvisible(view);
     }
 
     /**
@@ -132,7 +132,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public boolean isShowView(View view)
     {
-        return AppUtil.isShowView(view);
+        return ExAppUtils.isShowView(view);
     }
 
     /**
@@ -140,7 +140,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public void setStringSharedPreferences(String key, String value)
     {
-        AppUtil.setStringSharedPreferences(mContext,key,value);
+        ExAppUtils.setStringSharedPreferences(mContext,key,value);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public String getStringSharedPreferences(String key, String defaultValue)
     {
-        return AppUtil.getStringSharedPreferences(mContext,key,defaultValue);
+        return ExAppUtils.getStringSharedPreferences(mContext,key,defaultValue);
     }
 
     /**
@@ -156,7 +156,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public boolean isZh()
     {
-        return AppUtil.isZh(mContext);
+        return ExAppUtils.isZh(mContext);
     }
 
     /**
@@ -164,7 +164,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public boolean hasSdcard()
     {
-        return AppUtil.hasSdcard();
+        return ExAppUtils.hasSdcard();
     }
 
     /**
@@ -172,7 +172,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public boolean CheckNetworkState()
     {
-        return AppUtil.CheckNetworkState(mContext);
+        return ExAppUtils.CheckNetworkState(mContext);
     }
 
     /**
@@ -180,7 +180,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public int currentNetwork()
     {
-        return AppUtil.currentNetwork(mContext);
+        return ExAppUtils.currentNetwork(mContext);
     }
 
     /**
@@ -188,7 +188,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public int getDisplayHeight()
     {
-        return AppUtil.getDisplayHeight((Activity)mContext);
+        return ExAppUtils.getDisplayHeight((Activity)mContext);
     }
 
     /**
@@ -196,7 +196,7 @@ public class ExBaseActivity extends AppCompatActivity
      */
     public int getDisplayWidth()
     {
-        return AppUtil.getDisplayWidth((Activity)mContext);
+        return ExAppUtils.getDisplayWidth((Activity)mContext);
     }
 
 }

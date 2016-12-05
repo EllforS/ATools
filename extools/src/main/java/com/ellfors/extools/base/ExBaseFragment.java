@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.ellfors.extools.R;
-import com.ellfors.extools.utils.AppUtil;
+import com.ellfors.extools.utils.ExAppUtils;
 
 
 public class ExBaseFragment extends Fragment {
@@ -93,98 +93,98 @@ public class ExBaseFragment extends Fragment {
      * 打印文本 长时间
      */
     public void showToast(String msg) {
-        AppUtil.showToast(mContext, msg);
+        ExAppUtils.showToast(mContext, msg);
     }
 
     /**
      * 打印文本 短时间
      */
     public void showToast(int resId) {
-        AppUtil.showToast(mContext, resId);
+        ExAppUtils.showToast(mContext, resId);
     }
 
     /**
      * 显示视图
      */
     public void showView(View view) {
-        AppUtil.showView(view);
+        ExAppUtils.showView(view);
     }
 
     /**
      * 隐藏视图
      */
     public void hideViewGone(View view) {
-        AppUtil.hideViewGone(view);
+        ExAppUtils.hideViewGone(view);
     }
 
     /**
      * 隐藏视图 保留位置
      */
     public void hideViewInvisible(View view) {
-        AppUtil.hideViewInvisible(view);
+        ExAppUtils.hideViewInvisible(view);
     }
 
     /**
      * 判断视图是否显示
      */
     public boolean isShowView(View view) {
-        return AppUtil.isShowView(view);
+        return ExAppUtils.isShowView(view);
     }
 
     /**
      * 写入SharedPreferences数据
      */
     public void setStringSharedPreferences(String key, String value) {
-        AppUtil.setStringSharedPreferences(mContext, key, value);
+        ExAppUtils.setStringSharedPreferences(mContext, key, value);
     }
 
     /**
      * 读取SharedPreferences数据
      */
     public String getStringSharedPreferences(String key, String defaultValue) {
-        return AppUtil.getStringSharedPreferences(mContext, key, defaultValue);
+        return ExAppUtils.getStringSharedPreferences(mContext, key, defaultValue);
     }
 
     /**
      * 判断是否为中文版
      */
     public boolean isZh() {
-        return AppUtil.isZh(mContext);
+        return ExAppUtils.isZh(mContext);
     }
 
     /**
      * 检查是否存在SDCard
      */
     public boolean hasSdcard() {
-        return AppUtil.hasSdcard();
+        return ExAppUtils.hasSdcard();
     }
 
     /**
      * 验证是否存在可用网络
      */
     public boolean CheckNetworkState() {
-        return AppUtil.CheckNetworkState(mContext);
+        return ExAppUtils.CheckNetworkState(mContext);
     }
 
     /**
      * 验证网络状态 0 存在wifi网络， 1 存在2/3G网络，2无网络连接
      */
     public int currentNetwork() {
-        return AppUtil.currentNetwork(mContext);
+        return ExAppUtils.currentNetwork(mContext);
     }
 
     /**
      * 获取屏幕高度像素
      */
     public int getDisplayHeight() {
-        return AppUtil.getDisplayHeight((Activity) mContext);
+        return ExAppUtils.getDisplayHeight((Activity) mContext);
     }
 
     /**
      * 获取屏幕宽度像素
      */
     public int getDisplayWidth() {
-        return AppUtil.getDisplayWidth((Activity) mContext);
+        return ExAppUtils.getDisplayWidth((Activity) mContext);
     }
 
 }

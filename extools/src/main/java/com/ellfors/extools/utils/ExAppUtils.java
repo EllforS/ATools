@@ -17,7 +17,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * UI工具类
  */
-public class ExUiUtil {
+public class ExAppUtils {
 
     /**
      * Preferences参数
