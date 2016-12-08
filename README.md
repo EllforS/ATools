@@ -1,5 +1,5 @@
 # ATools
-Rapid development of framework
+一些简简单单的工具类
 
 Step 1. Add the JitPack repository to your build file
 ---
@@ -74,3 +74,18 @@ Utils
 	获取当前版本号   getAppVersionCode(Context context)
 ```
 * L(Logger 工具类) 具体查看orhanobut大神的 [Logger](https://github.com/orhanobut/logger)
+
+View
+===
+* CircleImageView(自定义圆形图片控件)
+* ExGridView (自适应ScrollView的GridView)
+* ExListView (自适应ScrollView的ListView)
+* ExRadioGroup (可换行的RadioGroup)
+```java
+	设置RadioButton的margin方法 setChildMargin(int l, int t, int r, int b);
+```
+* ExRecyclerView(自适应ScrollView的RecyclerView)
+* ExScrollView(解决5.0以上RecyclerView滑动卡顿的ScrollView)
+* ExStaggeredGridLayoutManager(不规则排列（类似于瀑布流）的布局管理器)
+* FullyGridLayoutManager(嵌套在ScrollView中的GridLayoutManager)
+* FullyLinearLayoutManager(嵌套在ScrollView中的LinearLayoutManager)
