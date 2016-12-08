@@ -25,21 +25,52 @@ Step 2. Add the dependency
 
 Utils
 ===
-ExAppUtils (UI工具类)
----
-
-ExBitmapCompressUtils (图片压缩工具类)
----·	
+*ExAppUtils (UI工具类)
+*ExBitmapCompressUtils (图片压缩工具类)
 ```java
-	compressImage(String filePath,String savePath) 压缩图片（需要压缩的图片地址，保存的地址）
-	deleteCacheImg(String savePath) 删除压缩的图片（压缩图片的保存地址）
+	压缩图片（需要压缩的图片地址，保存的地址   compressImage(String filePath,String savePath) 	）
+	删除压缩的图片（压缩图片的保存地址）      deleteCacheImg(String savePath) 		
 ```
-ExBitmapSaveUtils (保存图片到本地图库)
----
+*ExBitmapSaveUtils (保存图片到本地图库)
 ```java
-	saveImageToGallery(Context context, Bitmap bmp, String savePath) 保存图片到SD卡 并通知图库更新
+	保存图片到SD卡 并通知图库更新   saveImageToGallery(Context context, Bitmap bmp, String savePath) 
+	 
 	 图片的类都需要添加权限
  	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
  	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
  	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 ```
+*ExCheckTextUtil (正则表达式工具类)
+```java
+	检查是否为Email   isEmail(String strEmail) 		
+	检查是否为手机号   isPhoneNumberValid(String phoneNumber) 	
+	检查是否为手机号   isQQ(String str)
+```
+*ExDataCleanManager(计算和清空缓存大小)---好像并没有什么卵用
+```java
+	获取应用缓存大小   getTotalCacheSize(Context context)
+	清空应用缓存	     clearAllCache(Context context)
+```
+*ExNotificationUtils (通知栏工具类)
+```java
+	需要添加
+	<uses-permission android:name="android.permission.VIBRATE"/>
+	
+	发起普通通知(context,intent,大图标,小图标,标题,内容,震动时间,通知ID)   showNormalNotifi()
+	取消通知(通知ID)   cancelNotification(int id)
+	发起自定义通知(context,构造的View,intent,震动时间,通知ID)   showCustomNotifi()
+```
+*ExTimeUtil(时间工具类)
+```java
+	将字符串转位日期类型   toDate(String sdate)
+	以友好的方式显示时间   friendly_time(String sdate)
+	字符串日期转换成中文格式日期   dateToCnDate(String date)
+	格式化时间   formatDate(Date date)
+	获取当前时间   getNowTime()
+```
+*ExVersionUtils(获取App版本数据)
+```java
+	获取当前版本名   getAppVersionName(Context context)
+	获取当前版本号   getAppVersionCode(Context context)
+```
+*L(Logger 工具类) ![具体查看]{https://github.com/orhanobut/logger}
