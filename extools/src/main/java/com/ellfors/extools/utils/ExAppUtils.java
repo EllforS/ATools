@@ -20,7 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class ExAppUtils {
 
     /**
-     * Preferences参数
+     * Preferences constant
      */
     public static final String SHARED_USSER = "ExUtil";
 

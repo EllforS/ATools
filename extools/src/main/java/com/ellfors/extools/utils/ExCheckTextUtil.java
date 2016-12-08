@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class ExCheckTextUtil {
     /**
-     * 判断邮箱格式是否正确
+     * Check email format
      */
     public static boolean isEmail(String strEmail) {
         String strPattern = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
@@ -15,7 +15,7 @@ public class ExCheckTextUtil {
     }
 
     /**
-     * 判断手机格式是否正确
+     * Check phone number format
      */
     public static boolean isPhoneNumberValid(String phoneNumber) {
         boolean isValid = false;
@@ -40,7 +40,7 @@ public class ExCheckTextUtil {
     }
 
     /**
-     * 验证是否是QQ号码
+     * Check qq format
      */
     public static boolean isQQ(String str) {
         Pattern pattern = Pattern.compile("[0-9]{5,10}");

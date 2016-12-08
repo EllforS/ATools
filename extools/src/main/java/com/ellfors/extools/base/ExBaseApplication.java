@@ -6,6 +6,7 @@ import android.app.Application;
 import java.util.Stack;
 
 public class ExBaseApplication extends Application {
+
     private static Stack<Activity> stack;
 
     //双重校验锁

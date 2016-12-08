@@ -9,13 +9,17 @@
     android:orientation="vertical"
     tools:context="com.ellfors.atools.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+    <Button
+        android:id="@+id/btn_test_logger"
+        android:text="Test Logger"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/my_button"
+        android:text="Touch me"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

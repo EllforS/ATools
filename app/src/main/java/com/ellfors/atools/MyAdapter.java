@@ -2,18 +2,17 @@ package com.ellfors.atools;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ellfors.extools.adapter.BaseRcvAdapter;
-import com.ellfors.extools.base.BaseViewHolder;
+import com.ellfors.extools.adapter.ExBaseRcvAdapter;
+import com.ellfors.extools.base.ExBaseViewHolder;
 
 import java.util.List;
 
-public class MyAdapter extends BaseRcvAdapter {
+public class MyAdapter extends ExBaseRcvAdapter {
     private Context context;
     private List<String> list;
 
@@ -41,8 +40,6 @@ public class MyAdapter extends BaseRcvAdapter {
     @Override
     public void onBindHolder(RecyclerView.ViewHolder holder, int position) {
 
-        Log.i("AAA","position === " + position + "  type === " + holder.getItemViewType());
-
         if (holder instanceof ItemViewHolder) {
             ((ItemViewHolder) holder).text.setText(list.get(position));
         } else if (holder instanceof HeaderViewHolder) {
@@ -67,7 +64,7 @@ public class MyAdapter extends BaseRcvAdapter {
         }
     }
 
-    public class HeaderViewHolder extends BaseViewHolder {
+    public class HeaderViewHolder extends ExBaseViewHolder {
         private TextView title;
 
         public HeaderViewHolder(View itemView) {
@@ -77,7 +74,7 @@ public class MyAdapter extends BaseRcvAdapter {
         }
     }
 
-    public class FooterViewHolder extends BaseViewHolder {
+    public class FooterViewHolder extends ExBaseViewHolder {
         private TextView bottom;
 
         public FooterViewHolder(View itemView) {

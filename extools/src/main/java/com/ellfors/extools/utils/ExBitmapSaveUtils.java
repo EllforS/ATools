@@ -29,7 +29,8 @@ public class ExBitmapSaveUtils {
      */
     public static void createFile(String SavePath) {
         // 文件
-        File file = new File(SavePath);
+        String FilePath = getSDCardPath() + SavePath;
+        File file = new File(FilePath);
         if (!file.exists()) {
             file.mkdirs();
         }
@@ -61,7 +62,8 @@ public class ExBitmapSaveUtils {
     public static boolean saveImageToGallery(Context context, Bitmap bmp, String savePath) {
         errorMessage = "";
         // 首先保存图片
-        File appDir = new File(savePath);
+        String FilePath = getSDCardPath() + savePath;
+        File appDir = new File(FilePath);
         if (!appDir.exists()) {
             appDir.mkdir();
         }
