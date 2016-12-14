@@ -19,7 +19,7 @@ Step 2. Add the dependency
 ---
 ```java
   dependencies {
-	        compile 'com.github.EllforS:ATools:v2.1.0'
+	        compile 'com.github.EllforS:ATools:v2.1.1'
 	}
 ```
 
@@ -62,7 +62,8 @@ Utils
 ```
 * ExTimeUtil(时间工具类)
 ```java
-	将字符串转位日期类型   toDate(String sdate)
+	将字符串转位日期类型{yyyy-MM-dd HH:mm:ss}   toDate(String sdate)
+	将字符串转位日期类型_2{yyyy-MM-dd}   toDate_2(String sdate)
 	以友好的方式显示时间   friendly_time(String sdate)
 	字符串日期转换成中文格式日期   dateToCnDate(String date)
 	格式化时间   formatDate(Date date)
