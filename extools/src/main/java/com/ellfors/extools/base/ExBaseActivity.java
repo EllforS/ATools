@@ -20,7 +20,6 @@ public class ExBaseActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
         init();
     }
 

@@ -17,10 +17,14 @@ import com.ellfors.extools.base.ExBaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends ExBaseActivity
 {
-    private Button btn_test_logger;
-    private Button btn;
+    @BindView(R.id.btn_test_logger) Button btn_test_logger;
+    @BindView(R.id.my_button) Button btn;
     private Dialog dialog;
 
     private RecyclerView recyclerView;
@@ -31,40 +35,9 @@ public class MainActivity extends ExBaseActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        initBtn();
         initRecycler();
-    }
-
-    private void initBtn()
-    {
-        $(R.id.my_button).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Title");
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        showToast("AAAAAA");
-                    }
-                });
-                builder.setNegativeButton("取消", null);
-                dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        $(R.id.btn_test_logger).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext,TestLoggerActivity.class));
-            }
-        });
     }
 
     private void initRecycler()
@@ -93,6 +66,28 @@ public class MainActivity extends ExBaseActivity
                 showToast("第" + (position + 1) + "条长按");
             }
         });
+    }
+
+    @OnClick(R.id.my_button) void doTouchMeClick()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("Title");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                showToast("AAAAAA");
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    @OnClick(R.id.btn_test_logger) void doLoggerClick()
+    {
+        startActivity(new Intent(mContext,TestLoggerActivity.class));
     }
 
     private List<String> getData()

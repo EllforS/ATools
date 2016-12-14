@@ -26,7 +26,7 @@ public class ExTimeUtil {
     };
 
     /**
-     * 将字符串转位日期类型
+     * 将字符串转位日期类型(yyyy-MM-dd HH:mm:ss)
      *
      * @param sdate
      * @return
@@ -34,6 +34,20 @@ public class ExTimeUtil {
     public static Date toDate(String sdate) {
         try {
             return dateFormater.get().parse(sdate);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 将字符串转位日期类型(yyyy-MM-dd)
+     *
+     * @param sdate
+     * @return
+     */
+    public static Date toDate_2(String sdate) {
+        try {
+            return dateFormater2.get().parse(sdate);
         } catch (ParseException e) {
             return null;
         }
