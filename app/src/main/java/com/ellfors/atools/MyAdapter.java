@@ -23,8 +23,7 @@ public class MyAdapter extends ExBaseRcvAdapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateHolder(ViewGroup parent, int viewType) {
-
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
             return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.listitem_recycler, parent, false));
         }
@@ -45,12 +44,15 @@ public class MyAdapter extends ExBaseRcvAdapter {
         } else if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).title.setText("标题");
         } else if (holder instanceof FooterViewHolder) {
-            ((FooterViewHolder) holder).bottom.setText("底部");
+            if(isEnd())
+                ((FooterViewHolder) holder).bottom.setText("到底了");
+            else
+                ((FooterViewHolder) holder).bottom.setText("底部");
         }
     }
 
     @Override
-    public int getItemSize() {
+    public int getItemCount() {
         return list.size() + 2;
     }
 

@@ -5,14 +5,16 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
 import com.ellfors.extools.adapter.ExBaseRcvAdapter;
 import com.ellfors.extools.base.ExBaseActivity;
+import com.ellfors.extools.view.LoadingRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +25,18 @@ import butterknife.OnClick;
 
 public class MainActivity extends ExBaseActivity
 {
-    @BindView(R.id.btn_test_logger) Button btn_test_logger;
-    @BindView(R.id.my_button) Button btn;
+    @BindView(R.id.btn_test_logger)
+    Button btn_test_logger;
+    @BindView(R.id.my_button)
+    Button btn;
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
     private Dialog dialog;
 
-    private RecyclerView recyclerView;
+    private LoadingRecyclerView recyclerView;
     private MyAdapter adapter;
+
+    private List<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,6 +74,41 @@ public class MainActivity extends ExBaseActivity
                 showToast("第" + (position + 1) + "条长按");
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter = new MyAdapter(mContext,getData());
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.init(swipeRefreshLayout,adapter);
+                        swipeRefreshLayout.setRefreshing(false);
+                        adapter.setEnd(false);
+                    }
+                },1000);
+            }
+        });
+
+        recyclerView.init(swipeRefreshLayout,adapter);
+        recyclerView.setOnLoadingListener(new LoadingRecyclerView.OnLoadingListener() {
+            @Override
+            public void onLoading() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(!adapter.isEnd())
+                        {
+                            list.add("新增_1");
+                            list.add("新增_2");
+                            recyclerView.isLoadingEnd();
+                            checkListSize();
+                        }
+                    }
+                },1000);
+            }
+        });
     }
 
     @OnClick(R.id.my_button) void doTouchMeClick()
@@ -92,12 +135,18 @@ public class MainActivity extends ExBaseActivity
 
     private List<String> getData()
     {
-        List<String> list = new ArrayList<>();
+        list = new ArrayList<>();
         for(int i = 0 ; i < 20 ; i ++)
         {
             list.add("第" + (i+1) + "条");
         }
         return list;
+    }
+
+    private void checkListSize()
+    {
+        if(list.size() > 26)
+            adapter.setEnd(true);
     }
 
     @Override
@@ -106,8 +155,6 @@ public class MainActivity extends ExBaseActivity
         super.onStop();
 
         if(dialog != null && dialog.isShowing())
-        {
             dialog.dismiss();
-        }
     }
 }

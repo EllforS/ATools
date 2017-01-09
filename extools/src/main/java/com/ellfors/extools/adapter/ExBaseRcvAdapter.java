@@ -17,16 +17,23 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
     private boolean isHasHeader = false;
     private boolean isHasFooter = false;
 
+    private boolean isEnd = false;
+
+    public boolean isEnd() {
+        return isEnd;
+    }
+
+    public void setEnd(boolean end) {
+        isEnd = end;
+        notifyDataSetChanged();
+    }
+
     public ExBaseRcvAdapter(boolean isHasHeader, boolean isHasFooter) {
         this.isHasHeader = isHasHeader;
         this.isHasFooter = isHasFooter;
     }
 
-    public abstract RecyclerView.ViewHolder onCreateHolder(ViewGroup parent, int viewType);
-
     public abstract void onBindHolder(RecyclerView.ViewHolder holder, int position);
-
-    public abstract int getItemSize();
 
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
@@ -45,11 +52,6 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
 
     public interface OnItemLongClickListener {
         void onItemLongClick(View view, int position);
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return onCreateHolder(parent, viewType);
     }
 
     @Override
@@ -87,17 +89,12 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public int getItemCount() {
-        return getItemSize();
-    }
-
-    @Override
     public int getItemViewType(int position) {
         if (isHasHeader) {
             if (isHasFooter) {
                 if (position == 0) {
                     return TYPE_HEADER;
-                } else if (position + 1 == getItemSize()) {
+                } else if (position + 1 == getItemCount()) {
                     return TYPE_FOOTER;
                 } else {
                     return TYPE_ITEM;
@@ -111,7 +108,7 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
             }
         } else {
             if (isHasFooter) {
-                if (position == getItemSize() - 1) {
+                if (position == getItemCount() - 1) {
                     return TYPE_FOOTER;
                 } else {
                     return TYPE_ITEM;
