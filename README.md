@@ -23,6 +23,15 @@ Step 2. Add the dependency
 	}
 ```
 
+Base
+===
+* ExBaseRcvAdapter
+```java
+	构造函数传入isHasHeader,isHasFooter
+	isEnd(),setEnd(boolean end) 方法控制是否全部加载完成 setEnd方法自带notifyDataSetChanged() 
+	如果有FooterView 则list size + 1
+```
+	
 Utils
 ===
 * ExAppUtils (UI工具类)
@@ -90,3 +99,9 @@ View
 * ExStaggeredGridLayoutManager(不规则排列（类似于瀑布流）的布局管理器)
 * FullyGridLayoutManager(嵌套在ScrollView中的GridLayoutManager)
 * FullyLinearLayoutManager(嵌套在ScrollView中的LinearLayoutManager)
+* LoadingRecyclerView(上拉加载RecyclerView)
+```java
+	init(SwipeRefreshLayout s, Adapter a) 传入SwipeRefreshLayout，和用到的Adapter
+	setOnLoadingListener()加载监听
+	isLoadingEnd()加载结束
+```
