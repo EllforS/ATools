@@ -83,6 +83,13 @@ Utils
 	获取当前版本名   getAppVersionName(Context context)
 	获取当前版本号   getAppVersionCode(Context context)
 ```
+* ExVersionUtils(获取App版本数据)
+```java
+	dp转px  dp2px(Context context, float dpVal)
+	sp转px  sp2px(Context context, float spVal)
+	px转dp  px2dp(Context context, float pxVal)
+	px转sp  px2sp(Context context, float pxVal)
+```
 * L(Logger 工具类) 具体查看orhanobut大神的 [Logger](https://github.com/orhanobut/logger)
 
 View
