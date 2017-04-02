@@ -83,7 +83,7 @@ Utils
 	获取当前版本名   getAppVersionName(Context context)
 	获取当前版本号   getAppVersionCode(Context context)
 ```
-* ExVersionUtils(获取App版本数据)
+* ExDensityUtils(dp px 转换)
 ```java
 	dp转px  dp2px(Context context, float dpVal)
 	sp转px  sp2px(Context context, float spVal)
