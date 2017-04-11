@@ -40,13 +40,13 @@ public class ExBitmapCompressUtils
      */
     public static Bitmap getSmallBitmap(String filePath) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
+        //只解析图片边沿，获取宽高
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, options);
-
+        // 计算缩放比
         options.inSampleSize = calculateInSampleSize(options, 480, 800);
-
+        // 完整解析图片返回bitmap
         options.inJustDecodeBounds = false;
-
         return BitmapFactory.decodeFile(filePath, options);
     }
 
@@ -66,11 +66,13 @@ public class ExBitmapCompressUtils
      */
     public static File compressImage(String filePath,String savePath)
     {
+        //获取一定尺寸的图片
         Bitmap bm = getSmallBitmap(filePath);
 
         int degree = readPictureDegree(filePath);
+        //获取相片拍摄角度
         if (degree != 0) {
-            //旋转照片角度
+            //旋转照片角度，防止头像横着显示
             bm = rotateBitmap(bm, degree);
         }
 
