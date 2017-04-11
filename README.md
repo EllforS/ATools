@@ -90,7 +90,16 @@ Utils
 	px转dp  px2dp(Context context, float pxVal)
 	px转sp  px2sp(Context context, float pxVal)
 ```
+* ExStausBarUtils(设置沉浸式状态栏)
+```java
+	immerseStatusBar(Activity activity)
+	immerseStatusBar(Activity activity, int color)
+```
 * L(Logger 工具类) 具体查看orhanobut大神的 [Logger](https://github.com/orhanobut/logger)
+
+Transform
+===
+* CircleTransform（Glide加载圆形图片的Transform）
 
 View
 ===
