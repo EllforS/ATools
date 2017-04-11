@@ -19,7 +19,7 @@ Step 2. Add the dependency
 ---
 ```java
   dependencies {
-	        compile 'com.github.EllforS:ATools:v2.1.2'
+	        compile 'com.github.EllforS:ATools:2.1.3'
 	}
 ```
 
@@ -82,6 +82,13 @@ Utils
 ```java
 	获取当前版本名   getAppVersionName(Context context)
 	获取当前版本号   getAppVersionCode(Context context)
+```
+* ExDensityUtils(dp px 转换)
+```java
+	dp转px  dp2px(Context context, float dpVal)
+	sp转px  sp2px(Context context, float spVal)
+	px转dp  px2dp(Context context, float pxVal)
+	px转sp  px2sp(Context context, float pxVal)
 ```
 * L(Logger 工具类) 具体查看orhanobut大神的 [Logger](https://github.com/orhanobut/logger)
 
