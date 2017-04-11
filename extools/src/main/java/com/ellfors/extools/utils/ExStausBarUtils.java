@@ -6,7 +6,6 @@ import android.os.Build;
 import android.view.WindowManager;
 
 import com.ellfors.extools.R;
-import com.ellfors.extools.manager.SystemBarTintManager;
 
 /**
  * 沉浸式状态栏
