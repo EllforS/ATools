@@ -36,4 +36,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
     //Logger
     compile 'com.orhanobut:logger:1.15'
+    //Glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:support-v4:19.1.0'
 }
