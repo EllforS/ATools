@@ -19,7 +19,7 @@ Step 2. Add the dependency
 ---
 ```java
   dependencies {
-	        compile 'com.github.EllforS:ATools:2.1.3'
+	        compile 'com.github.EllforS:ATools:v2.1.4.1'
 	}
 ```
 
