@@ -121,3 +121,10 @@ View
 	setOnLoadingListener()加载监听
 	isLoadingEnd()加载结束
 ```
+* DividerGridItemDecoration(GridLayoutManager分割线)
+* DividerItemDecoration(LinearLayoutManager分割线)
+```java
+    改变分割线样式：
+        在Style中  <item name="android:listDivider">@drawable/divider_bg</item>
+        新建divider_bg绘制
+```

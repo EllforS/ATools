@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.Button;
 
 import com.ellfors.extools.adapter.ExBaseRcvAdapter;
 import com.ellfors.extools.base.ExBaseActivity;
+import com.ellfors.extools.view.DividerGridItemDecoration;
 import com.ellfors.extools.view.LoadingRecyclerView;
 
 import java.util.ArrayList;
@@ -51,10 +51,10 @@ public class MainActivity extends ExBaseActivity
     private void initRecycler()
     {
         recyclerView = $(R.id.recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(mContext));
 
-        adapter = new MyAdapter(this,getData());
+        adapter = new MyAdapter(this, getData());
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new ExBaseRcvAdapter.OnItemClickListener()
@@ -75,30 +75,38 @@ public class MainActivity extends ExBaseActivity
             }
         });
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
             @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
+            public void onRefresh()
+            {
+                new Handler().postDelayed(new Runnable()
+                {
                     @Override
-                    public void run() {
-                        adapter = new MyAdapter(mContext,getData());
+                    public void run()
+                    {
+                        adapter = new MyAdapter(mContext, getData());
                         recyclerView.setAdapter(adapter);
-                        recyclerView.init(swipeRefreshLayout,adapter);
+                        recyclerView.init(swipeRefreshLayout, adapter);
                         swipeRefreshLayout.setRefreshing(false);
                         adapter.setEnd(false);
                     }
-                },1000);
+                }, 1000);
             }
         });
 
-        recyclerView.init(swipeRefreshLayout,adapter);
-        recyclerView.setOnLoadingListener(new LoadingRecyclerView.OnLoadingListener() {
+        recyclerView.init(swipeRefreshLayout, adapter);
+        recyclerView.setOnLoadingListener(new LoadingRecyclerView.OnLoadingListener()
+        {
             @Override
-            public void onLoading() {
-                new Handler().postDelayed(new Runnable() {
+            public void onLoading()
+            {
+                new Handler().postDelayed(new Runnable()
+                {
                     @Override
-                    public void run() {
-                        if(!adapter.isEnd())
+                    public void run()
+                    {
+                        if (!adapter.isEnd())
                         {
                             list.add("新增_1");
                             list.add("新增_2");
@@ -106,12 +114,13 @@ public class MainActivity extends ExBaseActivity
                             checkListSize();
                         }
                     }
-                },1000);
+                }, 1000);
             }
         });
     }
 
-    @OnClick(R.id.my_button) void doTouchMeClick()
+    @OnClick(R.id.my_button)
+    void doTouchMeClick()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("Title");
@@ -128,24 +137,25 @@ public class MainActivity extends ExBaseActivity
         dialog.show();
     }
 
-    @OnClick(R.id.btn_test_logger) void doLoggerClick()
+    @OnClick(R.id.btn_test_logger)
+    void doLoggerClick()
     {
-        startActivity(new Intent(mContext,TestLoggerActivity.class));
+        startActivity(new Intent(mContext, TestLoggerActivity.class));
     }
 
     private List<String> getData()
     {
         list = new ArrayList<>();
-        for(int i = 0 ; i < 20 ; i ++)
+        for (int i = 0; i < 20; i++)
         {
-            list.add("第" + (i+1) + "条");
+            list.add("第" + (i + 1) + "条");
         }
         return list;
     }
 
     private void checkListSize()
     {
-        if(list.size() > 26)
+        if (list.size() > 26)
             adapter.setEnd(true);
     }
 
@@ -154,7 +164,7 @@ public class MainActivity extends ExBaseActivity
     {
         super.onStop();
 
-        if(dialog != null && dialog.isShowing())
+        if (dialog != null && dialog.isShowing())
             dialog.dismiss();
     }
 }

@@ -1,34 +1,45 @@
 package com.ellfors.extools.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 /**
  * RecyclerView Adapter
  */
-public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class ExBaseRcvAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
     protected static final int TYPE_HEADER = 11;
     protected static final int TYPE_ITEM = 12;
     protected static final int TYPE_FOOTER = 13;
 
+    public Context context;
+    public List<T> list;
     private boolean isHasHeader = false;
     private boolean isHasFooter = false;
 
     private boolean isEnd = false;
 
-    public boolean isEnd() {
+    public boolean isEnd()
+    {
         return isEnd;
     }
 
-    public void setEnd(boolean end) {
+    public void setEnd(boolean end)
+    {
         isEnd = end;
         notifyDataSetChanged();
     }
 
-    public ExBaseRcvAdapter(boolean isHasHeader, boolean isHasFooter) {
+    public ExBaseRcvAdapter(Context context, List<T> list, boolean isHasHeader, boolean isHasFooter)
+    {
+        this.context = context;
+        this.list = list;
         this.isHasHeader = isHasHeader;
         this.isHasFooter = isHasFooter;
     }
@@ -38,34 +49,45 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
         this.onItemClickListener = listener;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener listener)
+    {
         this.onItemLongClickListener = listener;
     }
 
-    public interface OnItemClickListener {
+    public interface OnItemClickListener
+    {
         void onItemClick(View view, int position);
     }
 
-    public interface OnItemLongClickListener {
+    public interface OnItemLongClickListener
+    {
         void onItemLongClick(View view, int position);
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if (isHasHeader) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position)
+    {
+        if (isHasHeader)
+        {
             onBindHolder(holder, position - 1);
-        } else {
+        }
+        else
+        {
             onBindHolder(holder, position);
         }
 
-        if (onItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+        if (onItemClickListener != null)
+        {
+            holder.itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v)
+                {
                     if (isHasHeader)
                         onItemClickListener.onItemClick(holder.itemView, holder.getLayoutPosition() - 1);
                     else
@@ -74,10 +96,13 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
             });
         }
 
-        if (onItemLongClickListener != null) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        if (onItemLongClickListener != null)
+        {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+            {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onLongClick(View v)
+                {
                     if (isHasHeader)
                         onItemLongClickListener.onItemLongClick(holder.itemView, holder.getLayoutPosition() - 1);
                     else
@@ -89,31 +114,52 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public int getItemViewType(int position) {
-        if (isHasHeader) {
-            if (isHasFooter) {
-                if (position == 0) {
+    public int getItemViewType(int position)
+    {
+        if (isHasHeader)
+        {
+            if (isHasFooter)
+            {
+                if (position == 0)
+                {
                     return TYPE_HEADER;
-                } else if (position + 1 == getItemCount()) {
-                    return TYPE_FOOTER;
-                } else {
-                    return TYPE_ITEM;
                 }
-            } else {
-                if (position == 0) {
-                    return TYPE_HEADER;
-                } else {
+                else if (position + 1 == getItemCount())
+                {
+                    return TYPE_FOOTER;
+                }
+                else
+                {
                     return TYPE_ITEM;
                 }
             }
-        } else {
-            if (isHasFooter) {
-                if (position == getItemCount() - 1) {
-                    return TYPE_FOOTER;
-                } else {
+            else
+            {
+                if (position == 0)
+                {
+                    return TYPE_HEADER;
+                }
+                else
+                {
                     return TYPE_ITEM;
                 }
-            } else {
+            }
+        }
+        else
+        {
+            if (isHasFooter)
+            {
+                if (position == getItemCount() - 1)
+                {
+                    return TYPE_FOOTER;
+                }
+                else
+                {
+                    return TYPE_ITEM;
+                }
+            }
+            else
+            {
                 return TYPE_ITEM;
             }
         }
@@ -123,26 +169,34 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
      * 为GridViewLayout FootView设置占位为一行
      */
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(RecyclerView recyclerView)
+    {
         super.onAttachedToRecyclerView(recyclerView);
 
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
 
-        if (manager instanceof GridLayoutManager) {
+        if (manager instanceof GridLayoutManager)
+        {
 
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);
 
-            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup()
+            {
                 @Override
-                public int getSpanSize(int position) {
+                public int getSpanSize(int position)
+                {
                     //footview
-                    if (getItemViewType(position) % TYPE_FOOTER == 0 && isHasFooter) {
+                    if (getItemViewType(position) % TYPE_FOOTER == 0 && isHasFooter)
+                    {
                         return gridManager.getSpanCount();
                     }
                     //headview
-                    else if (position == 0 && isHasHeader) {
+                    else if (position == 0 && isHasHeader)
+                    {
                         return gridManager.getSpanCount();
-                    } else {
+                    }
+                    else
+                    {
                         return 1;
                     }
                 }
@@ -154,7 +208,8 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
      * 为StaggeredGridLayout FootView设置占位为一行
      */
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder)
+    {
         super.onViewAttachedToWindow(holder);
 
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
@@ -162,14 +217,16 @@ public abstract class ExBaseRcvAdapter extends RecyclerView.Adapter<RecyclerView
         //HeaderView
         if (lp != null
                 && lp instanceof StaggeredGridLayoutManager.LayoutParams
-                && holder.getLayoutPosition() == 0) {
+                && holder.getLayoutPosition() == 0)
+        {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
             p.setFullSpan(true);
         }
         //FooterView
         else if (lp != null
                 && lp instanceof StaggeredGridLayoutManager.LayoutParams
-                && holder.getLayoutPosition() % TYPE_FOOTER == 0) {
+                && holder.getLayoutPosition() % TYPE_FOOTER == 0)
+        {
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
             p.setFullSpan(true);
         }
