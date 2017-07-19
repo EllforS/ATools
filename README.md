@@ -19,7 +19,7 @@ Step 2. Add the dependency
 ---
 ```java
   dependencies {
-	        compile 'com.github.EllforS:ATools:v2.1.4.1'
+	        compile 'com.github.EllforS:ATools:v2.2.0'
 	}
 ```
 
@@ -27,9 +27,7 @@ Base
 ===
 * ExBaseRcvAdapter
 ```java
-	构造函数传入isHasHeader,isHasFooter
-	isEnd(),setEnd(boolean end) 方法控制是否全部加载完成 setEnd方法自带notifyDataSetChanged() 
-	如果有FooterView 则list size + 1
+	添加点击事件
 ```
 	
 Utils
@@ -96,10 +94,19 @@ Utils
 	immerseStatusBar(Activity activity, int color)
 ```
 * L(Logger 工具类) 具体查看orhanobut大神的 [Logger](https://github.com/orhanobut/logger)
-
-Transform
-===
-* CircleTransform（Glide加载圆形图片的Transform）
+* ExImageLoader(图片加载类)
+```java
+    如果参数placeholder、error为0则使用默认图片
+    加载图片         loadImg(Context context, String url, ImageView iv)
+    加载图片带占位图  loadImg(Context context, String url, ImageView iv, int placeholder, int error)
+    加载圆形图片      loadCircleImg(Context context, String url, ImageView iv, int placeholder, int error)
+    加载图片带监听    loadImgAndListener(Context context, String url, ImageView iv, int placeholder, int error, final RequestListener<Drawable> listener)
+    获取图片         getImg(Context context, String url, int width, int height)
+```
+* FilterEmojiUtils(EditText过滤Emoji表情工具类)
+```java
+    设置EditText不能输入Emoji表情   filterEmoji(EditText editText)
+```
 
 View
 ===

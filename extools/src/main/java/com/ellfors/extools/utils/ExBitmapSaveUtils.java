@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * 保存图片到本地图库
@@ -64,9 +66,7 @@ public class ExBitmapSaveUtils {
         // 首先保存图片
         String FilePath = getSDCardPath() + savePath;
         File appDir = new File(FilePath);
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
+        appDir.mkdirs();
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(appDir, fileName);
         try {
@@ -74,10 +74,9 @@ public class ExBitmapSaveUtils {
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             errorMessage += e.getMessage();
-        } catch (IOException e) {
-            errorMessage += e.getMessage();
+            Log.e(TAG, "saveImageToGallery: " + e.getMessage());
         }
 
         // 其次把文件插入到系统图库
@@ -89,8 +88,7 @@ public class ExBitmapSaveUtils {
         }
 
         // 最后通知图库更新
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
-
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
         //回收内存
         if (!bmp.isRecycled()) {
             bmp.recycle();

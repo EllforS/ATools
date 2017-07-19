@@ -97,7 +97,7 @@ public class LoadingRecyclerView extends RecyclerView
     /**
      * 刷新结束
      */
-    public void isLoadingEnd()
+    public void isLoadingComplete()
     {
         adapter.notifyDataSetChanged();
         isLoading = false;
