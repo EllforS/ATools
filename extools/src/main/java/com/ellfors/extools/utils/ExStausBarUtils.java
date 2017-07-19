@@ -2,10 +2,9 @@ package com.ellfors.extools.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.WindowManager;
-
-import com.ellfors.extools.R;
 
 /**
  * 沉浸式状态栏
@@ -28,7 +27,7 @@ public class ExStausBarUtils
         {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             tintManager = new SystemBarTintManager(activity);
-            tintManager.setStatusBarTintColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+            tintManager.setStatusBarTintColor(Color.TRANSPARENT);
             tintManager.setStatusBarTintEnabled(true);
         }
     }
