@@ -5,25 +5,31 @@ import android.app.Application;
 
 import java.util.Stack;
 
-public class ExBaseApplication extends Application {
+public class ExBaseApplication extends Application
+{
 
     private static Stack<Activity> stack;
 
     //双重校验锁
     private volatile static ExBaseApplication instance; //加入volatile防止JVM重排序
 
-    public ExBaseApplication() {
+    public ExBaseApplication()
+    {
 
     }
 
-    public static ExBaseApplication getInstance() {
+    public static ExBaseApplication getInstance()
+    {
 
         //第一次检查
-        if (instance == null) {
+        if (instance == null)
+        {
             //加入同步锁，保证线程安全
-            synchronized (ExBaseApplication.class) {
+            synchronized (ExBaseApplication.class)
+            {
                 //第二次检查
-                if (instance == null) {
+                if (instance == null)
+                {
                     instance = new ExBaseApplication();
                 }
             }
@@ -32,13 +38,15 @@ public class ExBaseApplication extends Application {
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
 
         init();
     }
 
-    private void init() {
+    private void init()
+    {
         instance = this;
         stack = new Stack<Activity>();
     }
@@ -48,8 +56,10 @@ public class ExBaseApplication extends Application {
      *
      * @param activity
      */
-    public void addTask(Activity activity) {
-        if (stack == null) {
+    public void addTask(Activity activity)
+    {
+        if (stack == null)
+        {
             stack = new Stack<Activity>();
         }
         stack.add(activity);
@@ -60,7 +70,8 @@ public class ExBaseApplication extends Application {
      *
      * @return activity
      */
-    public Activity currentActivity() {
+    public Activity currentActivity()
+    {
         Activity activity = stack.lastElement();
         return activity;
     }
@@ -68,7 +79,8 @@ public class ExBaseApplication extends Application {
     /**
      * 结束当前Activity
      */
-    public void finishActivity() {
+    public void finishActivity()
+    {
         Activity activity = stack.lastElement();
         finishActivity(activity);
     }
@@ -78,8 +90,10 @@ public class ExBaseApplication extends Application {
      *
      * @param activity
      */
-    public void finishActivity(Activity activity) {
-        if (activity != null) {
+    public void finishActivity(Activity activity)
+    {
+        if (activity != null)
+        {
             stack.remove(activity);
             activity.finish();
             activity = null;
@@ -91,9 +105,12 @@ public class ExBaseApplication extends Application {
      *
      * @param cls
      */
-    public void finishActivity(Class<?> cls) {
-        for (Activity activity : stack) {
-            if (activity.getClass().equals(cls)) {
+    public void finishActivity(Class<?> cls)
+    {
+        for (Activity activity : stack)
+        {
+            if (activity.getClass().equals(cls))
+            {
                 finishActivity(activity);
             }
         }
@@ -105,9 +122,12 @@ public class ExBaseApplication extends Application {
      * @param cls
      * @return
      */
-    public boolean hasActivity(Class<?> cls) {
-        for (Activity activity : stack) {
-            if (activity.getClass().equals(cls)) {
+    public boolean hasActivity(Class<?> cls)
+    {
+        for (Activity activity : stack)
+        {
+            if (activity.getClass().equals(cls))
+            {
                 return true;
             }
         }
@@ -117,9 +137,12 @@ public class ExBaseApplication extends Application {
     /**
      * 结束所有的Activity
      */
-    public void finishAllActivity() {
-        for (int i = 0, size = stack.size(); i < size; i++) {
-            if (null != stack.get(i)) {
+    public void finishAllActivity()
+    {
+        for (int i = 0, size = stack.size(); i < size; i++)
+        {
+            if (null != stack.get(i))
+            {
                 stack.get(i).finish();
             }
         }
@@ -132,7 +155,8 @@ public class ExBaseApplication extends Application {
      * @param VersionCode
      * @return
      */
-    public static boolean isMethodsCompat(int VersionCode) {
+    public static boolean isMethodsCompat(int VersionCode)
+    {
         int currentVersion = android.os.Build.VERSION.SDK_INT;
         return currentVersion >= VersionCode;
     }

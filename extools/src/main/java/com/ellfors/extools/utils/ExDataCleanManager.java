@@ -7,7 +7,8 @@ import java.io.File;
 import java.math.BigDecimal;
 
 /**
- * 计算和清空缓存大小
+ * 缓存相关工具类
+ * 2018/3/26 15:33
  */
 public class ExDataCleanManager
 {

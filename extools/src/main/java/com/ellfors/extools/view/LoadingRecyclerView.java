@@ -64,7 +64,7 @@ public class LoadingRecyclerView extends RecyclerView
                 {
                     isLoading = true;
 
-                    if(onLoadingListener != null)
+                    if (onLoadingListener != null)
                     {
                         onLoadingListener.onLoading();
                     }
@@ -76,15 +76,15 @@ public class LoadingRecyclerView extends RecyclerView
             {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if(getLayoutManager() instanceof LinearLayoutManager)
+                if (getLayoutManager() instanceof LinearLayoutManager)
                 {
-                    lastVisibleItem = ((LinearLayoutManager)getLayoutManager()).findLastVisibleItemPosition();
+                    lastVisibleItem = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
                 }
-                else if(getLayoutManager() instanceof GridLayoutManager)
+                else if (getLayoutManager() instanceof GridLayoutManager)
                 {
                     lastVisibleItem = ((GridLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
                 }
-                else if(getLayoutManager() instanceof StaggeredGridLayoutManager)
+                else if (getLayoutManager() instanceof StaggeredGridLayoutManager)
                 {
                     StaggeredGridLayoutManager sgm = (StaggeredGridLayoutManager) getLayoutManager();
                     int[] positions = sgm.findLastVisibleItemPositions(null);

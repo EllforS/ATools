@@ -4,11 +4,12 @@ import android.content.Context;
 import android.util.TypedValue;
 
 /**
- * dp px 相互转换
+ * 单位转换工具类
+ * 2018/3/26 15:34
  */
-public class ExDensityUtils
+public class ExDensityUtil
 {
-    private ExDensityUtils()
+    private ExDensityUtil()
     {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");

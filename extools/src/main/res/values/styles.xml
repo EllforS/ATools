@@ -2,11 +2,35 @@
 
     <!--可换行的RadioGroup-->
     <declare-styleable name="FNRadioGroup">
-        <attr name="checkedButton" format="integer"/>
-        <attr name="childMarginLeft" format="dimension"/>
-        <attr name="childMarginRight" format="dimension"/>
-        <attr name="childMarginTop" format="dimension"/>
-        <attr name="childMarginBottom" format="dimension"/>
+        <attr name="checkedButton" format="integer" />
+        <attr name="childMarginLeft" format="dimension" />
+        <attr name="childMarginRight" format="dimension" />
+        <attr name="childMarginTop" format="dimension" />
+        <attr name="childMarginBottom" format="dimension" />
     </declare-styleable>
+
+    <!-- PopupWindow向下滑出动画 -->
+    <style name="AnimDown" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/push_scale_out</item>
+    </style>
+
+    <!-- PopupWindow向上滑出动画 -->
+    <style name="AnimUp" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <!-- PopupWindow横向滑出动画 -->
+    <style name="AnimLeft" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_scale_left_in</item>
+        <item name="android:windowExitAnimation">@anim/push_scale_left_out</item>
+    </style>
+
+    <!-- PopupWindow横向滑出动画 -->
+    <style name="AnimRight" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_scale_right_in</item>
+        <item name="android:windowExitAnimation">@anim/push_scale_right_out</item>
+    </style>
 
 </resources>

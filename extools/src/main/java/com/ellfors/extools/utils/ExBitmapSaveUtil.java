@@ -17,23 +17,27 @@ import static android.content.ContentValues.TAG;
 
 /**
  * 保存图片到本地图库
+ * 2018/3/26 15:32
  * <p>
  * 需要添加权限
  * <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
  * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
  * <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
  */
-public class ExBitmapSaveUtils {
+public class ExBitmapSaveUtil
+{
     private static String errorMessage;
 
     /**
      * 创建本地文件夹
      */
-    public static void createFile(String SavePath) {
+    public static void createFile(String SavePath)
+    {
         // 文件
         String FilePath = getSDCardPath() + SavePath;
         File file = new File(FilePath);
-        if (!file.exists()) {
+        if (!file.exists())
+        {
             file.mkdirs();
         }
     }
@@ -43,11 +47,13 @@ public class ExBitmapSaveUtils {
      *
      * @return
      */
-    public static String getSDCardPath() {
+    public static String getSDCardPath()
+    {
         File sdcardDir = null;
         // 判断SDCard是否存在
-        boolean sdcardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
-        if (sdcardExist) {
+        boolean sdcardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+        if (sdcardExist)
+        {
             sdcardDir = Environment.getExternalStorageDirectory();
         }
         return sdcardDir.toString();
@@ -61,7 +67,8 @@ public class ExBitmapSaveUtils {
      * @param savePath
      * @return
      */
-    public static boolean saveImageToGallery(Context context, Bitmap bmp, String savePath) {
+    public static boolean saveImageToGallery(Context context, Bitmap bmp, String savePath)
+    {
         errorMessage = "";
         // 首先保存图片
         String FilePath = getSDCardPath() + savePath;
@@ -69,28 +76,35 @@ public class ExBitmapSaveUtils {
         appDir.mkdirs();
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(appDir, fileName);
-        try {
+        try
+        {
             FileOutputStream fos = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             errorMessage += e.getMessage();
             Log.e(TAG, "saveImageToGallery: " + e.getMessage());
         }
 
         // 其次把文件插入到系统图库
-        try {
+        try
+        {
             MediaStore.Images.Media.insertImage(context.getContentResolver(),
                     file.getAbsolutePath(), fileName, null);
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e)
+        {
             errorMessage += e.getMessage();
         }
 
         // 最后通知图库更新
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
         //回收内存
-        if (!bmp.isRecycled()) {
+        if (!bmp.isRecycled())
+        {
             bmp.recycle();
             System.gc();
         }

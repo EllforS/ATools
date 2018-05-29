@@ -10,11 +10,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Logger Utils
+ * Logger打印工具类
+ * 2018/3/26 15:25
  */
-public class L
+public class ExLoggerUtil
 {
-    private static String mTag = "AAA";
+    private static String mTag = "default";
     private static Settings settings;
 
     /**
@@ -180,5 +181,4 @@ public class L
     {
         return Logger.t(str);
     }
-
 }

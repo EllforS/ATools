@@ -1,23 +1,32 @@
 package com.ellfors.extools.base;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ellfors.extools.R;
-import com.ellfors.extools.utils.ExAppUtils;
 
 
-public class ExBaseFragment extends Fragment {
+public class ExBaseFragment extends Fragment
+{
     private Context mContext;
     private ProgressDialog mProgressDialog;
     private View mView;
+    private Toast mToast;
+    private int mToastY = 0;// toast默认显示高度
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         init();
@@ -31,7 +40,8 @@ public class ExBaseFragment extends Fragment {
         mView = view;
     }
 
-    private void init() {
+    private void init()
+    {
         mContext = getActivity();
         mProgressDialog = new ProgressDialog(mContext);
         mProgressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
@@ -56,7 +66,8 @@ public class ExBaseFragment extends Fragment {
     /**
      * 显示自定义ProgrssDialog
      */
-    public void showProgressDialog(String msg) {
+    public void showProgressDialog(String msg)
+    {
         mProgressDialog.setMessage(msg);
         mProgressDialog.show();
     }
@@ -64,7 +75,8 @@ public class ExBaseFragment extends Fragment {
     /**
      * 显示默认ProgressDialog
      */
-    public void showDefaultProgressDialog() {
+    public void showDefaultProgressDialog()
+    {
         mProgressDialog.setMessage(getResources().getString(R.string.progressdialog_toast));
         mProgressDialog.show();
     }
@@ -72,8 +84,10 @@ public class ExBaseFragment extends Fragment {
     /**
      * 隐藏ProgressDialog
      */
-    public void dismissProgressDialog() {
-        if (mProgressDialog != null) {
+    public void dismissProgressDialog()
+    {
+        if (mProgressDialog != null)
+        {
             mProgressDialog.dismiss();
         }
     }
@@ -81,110 +95,83 @@ public class ExBaseFragment extends Fragment {
     /**
      * 判断ProgressDialog是否为显示状态
      */
-    public boolean progressDialogIsShowing() {
-        if (mProgressDialog.isShowing()) {
-            return true;
-        } else {
-            return false;
+    public boolean progressDialogIsShowing()
+    {
+        return mProgressDialog.isShowing();
+    }
+
+    /**
+     * toast 文字
+     */
+    public void showToast(int textResId)
+    {
+        showToast(getString(textResId), 0);
+    }
+
+    /**
+     * toast 文字带图片
+     */
+    public void showToast(int textResId, int iconResId)
+    {
+        showToast(getString(textResId), iconResId);
+    }
+
+    /**
+     * toast 文字
+     */
+    public void showToast(String text)
+    {
+        showToast(text, 0);
+    }
+
+    /**
+     * toast 文字带图片
+     */
+    @SuppressLint("ShowToast")
+    public void showToast(String text, int iconResId)
+    {
+        if (TextUtils.isEmpty(text))
+        {
+            return;
         }
+        TextView tv;
+        if (mToast == null)
+        {
+            mToast = Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT);
+            LayoutInflater inflate = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            tv = (TextView) inflate.inflate(R.layout.dialog_toast, null);
+            mToast.setView(tv);
+            mToastY = mToast.getYOffset();
+        }
+        tv = (TextView) mToast.getView();
+        tv.setText(text);
+        Drawable icon = null;
+        if (iconResId > 0)
+        {
+            try
+            {
+                icon = getResources().getDrawable(iconResId);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            mToast.setGravity(Gravity.CENTER, 0, 0);
+        }
+        else
+        {
+            mToast.setGravity(Gravity.BOTTOM, 0, mToastY);
+        }
+        tv.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
+        mToast.show();
     }
 
     /**
-     * 打印文本 长时间
+     * 取消toast
      */
-    public void showToast(String msg) {
-        ExAppUtils.showToast(mContext, msg);
+    public void cancelToast()
+    {
+        if (mToast != null)
+            mToast.cancel();
     }
-
-    /**
-     * 打印文本 短时间
-     */
-    public void showToast(int resId) {
-        ExAppUtils.showToast(mContext, resId);
-    }
-
-    /**
-     * 显示视图
-     */
-    public void showView(View view) {
-        ExAppUtils.showView(view);
-    }
-
-    /**
-     * 隐藏视图
-     */
-    public void hideViewGone(View view) {
-        ExAppUtils.hideViewGone(view);
-    }
-
-    /**
-     * 隐藏视图 保留位置
-     */
-    public void hideViewInvisible(View view) {
-        ExAppUtils.hideViewInvisible(view);
-    }
-
-    /**
-     * 判断视图是否显示
-     */
-    public boolean isShowView(View view) {
-        return ExAppUtils.isShowView(view);
-    }
-
-    /**
-     * 写入SharedPreferences数据
-     */
-    public void setStringSharedPreferences(String key, String value) {
-        ExAppUtils.setStringSharedPreferences(mContext, key, value);
-    }
-
-    /**
-     * 读取SharedPreferences数据
-     */
-    public String getStringSharedPreferences(String key, String defaultValue) {
-        return ExAppUtils.getStringSharedPreferences(mContext, key, defaultValue);
-    }
-
-    /**
-     * 判断是否为中文版
-     */
-    public boolean isZh() {
-        return ExAppUtils.isZh(mContext);
-    }
-
-    /**
-     * 检查是否存在SDCard
-     */
-    public boolean hasSdcard() {
-        return ExAppUtils.hasSdcard();
-    }
-
-    /**
-     * 验证是否存在可用网络
-     */
-    public boolean CheckNetworkState() {
-        return ExAppUtils.CheckNetworkState(mContext);
-    }
-
-    /**
-     * 验证网络状态 0 存在wifi网络， 1 存在2/3G网络，2无网络连接
-     */
-    public int currentNetwork() {
-        return ExAppUtils.currentNetwork(mContext);
-    }
-
-    /**
-     * 获取屏幕高度像素
-     */
-    public int getDisplayHeight() {
-        return ExAppUtils.getDisplayHeight((Activity) mContext);
-    }
-
-    /**
-     * 获取屏幕宽度像素
-     */
-    public int getDisplayWidth() {
-        return ExAppUtils.getDisplayWidth((Activity) mContext);
-    }
-
 }
