@@ -5,6 +5,7 @@ package com.ellfors.extools.utils;
  * 2018/3/27 10:06
  */
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -138,6 +141,26 @@ public class ExAndroidUtil
         catch (IOException e)
         {
             Log.e(TAG, e.getMessage());
+        }
+    }
+
+
+    /**
+     * 获取设备唯一标识
+     */
+    @SuppressLint("HardwareIds")
+    public static String getUniqueId(Context context)
+    {
+        String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String id = androidID + Build.SERIAL;
+        try
+        {
+            return ExMD5Util.md5(id);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return id;
         }
     }
 

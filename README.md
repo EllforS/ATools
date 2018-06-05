@@ -31,7 +31,7 @@ Base
 
 Utils
 ===
-* ExAndroidUtil (UI工具类)
+* ExAndroidUtil (系统工具类)
 * ExBitmapCompressUtil (图片压缩工具类)
 ```java
     压缩图片(需要压缩的图片地址  getCompressImage(String pic_path))
