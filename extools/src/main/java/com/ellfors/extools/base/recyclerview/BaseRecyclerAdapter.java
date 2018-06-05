@@ -31,12 +31,12 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
 
     public interface OnItemClickListener
     {
-        void onItemClick(View view, int position, com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData bean);
+        void onItemClick(View view, int position, BaseRecyclerData bean);
     }
 
     public interface OnItemLongClickListener
     {
-        void onItemLongClick(View view, int position, com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData bean);
+        void onItemLongClick(View view, int position, BaseRecyclerData bean);
     }
 
     public interface OnTextWatcher
@@ -48,7 +48,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
      * ************************ 初始化设置 ****************************************
      */
     protected Context mContext;
-    protected List<com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData> items;
+    protected List<BaseRecyclerData> items;
     protected LayoutInflater mInflater;
     protected OnItemClickListener mListener;
     protected OnItemLongClickListener mLongListener;
@@ -57,7 +57,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
     //默认权重
     private int defWeight = 1;
 
-    public BaseRecyclerAdapter(Context mContext, List<com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData> items)
+    public BaseRecyclerAdapter(Context mContext, List<BaseRecyclerData> items)
     {
         this.mContext = mContext;
         this.items = items;
@@ -88,7 +88,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
     {
         if (null != items && items.size() > position)
         {
-            com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData obj = items.get(position);
+            BaseRecyclerData obj = items.get(position);
             if (null != obj)
                 return obj.getType();
         }
@@ -139,7 +139,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
     }
 
     /* 获取指定指针的数据 */
-    public com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData getData(int position)
+    public BaseRecyclerData getData(int position)
     {
         if (null == items)
         {
@@ -149,14 +149,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
     }
 
     /* 初始化数据 */
-    public void setData(List<com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData> msg)
+    public void setData(List<BaseRecyclerData> msg)
     {
         this.items = msg;
         notifyDataSetChanged();
     }
 
     /* 添加数据 */
-    public void addData(List<com.kingstarit.tjxs_ent.base.recyclerview.BaseRecyclerData> msg)
+    public void addData(List<BaseRecyclerData> msg)
     {
         if (msg != null && msg.size() > 0)
         {

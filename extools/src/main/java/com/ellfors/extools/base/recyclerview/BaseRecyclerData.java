@@ -1,4 +1,4 @@
-package com.kingstarit.tjxs_ent.base.recyclerview;
+package com.ellfors.extools.base.recyclerview;
 
 /**
  * BaseRecyclerData
