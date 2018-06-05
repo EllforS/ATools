@@ -18,7 +18,7 @@ Step 2. Add the dependency
 ---
 ```java
   dependencies {
-        implementation 'com.github.EllforS:ATools:v3.0.1'
+        implementation 'com.github.EllforS:ATools:v3.0.2'
     }
 ```
 
